@@ -1,0 +1,26 @@
+{
+  "name": "marknotes",
+  "version": "0.1.0",
+  "description": "All notes include tutorials and brief of knowledge",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/siege250294/marknotes.git"
+  },
+  "keywords": [
+    "markdown",
+    "note",
+    "brief",
+    "learning",
+    "knowledge"
+  ],
+  "author": "Nhan Hoang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/siege250294/marknotes/issues"
+  },
+  "homepage": "https://github.com/siege250294/marknotes#readme"
+}

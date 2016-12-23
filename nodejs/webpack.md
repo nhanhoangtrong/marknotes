@@ -9,6 +9,27 @@
 * `--config <config_file_path>`: set the config file manually. If not set, the default file is `./webpack.config.js`
 * `--env`: enviroment passed to the config, when the config was exported as a function
 
+## `webpack` function
+
+We can run `webpack` by passing to it an config object.
+
+Example:
+
+```javascript
+let webpack = require('webpack')
+let webpackConfig = require('webpack.config.js')
+
+let myWebpackConfig = Object.create(webpackConfig)
+webpack(myWebpackObject, function(err, stats) {
+	if (err) {
+    	return console.error(err)
+    }
+    return console.log(stats.toString({
+    	color: true
+    }))
+})
+```
+
 ## `webpack` configuration object
 
 ### `entry` property
@@ -187,6 +208,38 @@ plugins: [
     }),
     new ExtractTextPlugin("css/main.css")
 ]
+```
+
+## [`webpack-dev-server`] and `webpack-dev-middlewere`
+
+### Run [`webpack-dev-server`] asynchronously
+
+```javascript
+let WebpackDevServer = require('webpack-dev-sevrer')
+let webpackConfig = require('webpack.config.js')
+
+let myConfig = Object.create(webpackConfig)
+myConfig.plugins = (myConfig.plugins || []).concat(
+	new webpack.DefinePlugin({
+    	"process.env": {
+        	// This has effect on the React lib size
+            "NODE_ENV": JSON.stringify("development")
+        }
+    }))
+myConfig.devtool = "eval"
+myConfig.debug = true
+
+new WebpackDevServer(webpack(myConfig), {
+	publicPath: "/" + myConfig.output.publicPath,
+    stats: {
+    	colors: true
+    }
+}).listen(8080, "localhost", function(err) {
+	if (err) {
+		return console.error(err)
+    }
+    console.log("Dev-Server is running in http://localhost:8080")
+})
 ```
 
 ## Some useful [`webpack`] plugins

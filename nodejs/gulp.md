@@ -9,7 +9,7 @@
 
 This where we register all tasks could be executed and call `gulp <task_name>` to run a task. The `default` task could be run with `gulp` command.
 
-### `gulp` tasks
+### Create a `gulp` tasks
 
 ```javascript
 var gulp = require('gulp'),
@@ -22,11 +22,13 @@ gulp.task('stylus', function() {
 })
 ```
 
-### File match
+### File matching in `gulp.src` function
 
 * `*.<ext>`: Match any file name with <ext> in a folder
 * `**/*.<ext>`: Match any file name with <ext> in this folder and all subfolders
-* `*`: Match every file
+* `**/*.+(<ext1>|<ext2>)`: Match any file name which has extensions <ext1> or <ext2>
+* `*`: Match every file in folder
+* `**/*`: Match every file in folder and subfolder
 
 ### Integrate `browser-sync` with `gulp`
 
@@ -88,3 +90,63 @@ gulp.task('default', function() {
     runSequence('task1', 'task2', ['task3-1', 'task3-2'])
 })
 ```
+
+## Some useful `gulp` modules
+
+For more modules, find at [essential-gulp-plugins](https://github.com/Pestov/essential-gulp-plugins)
+
+### Utilities
+
+#### `gulp-rename` for renaming output files
+
+#### `gulp-useref` for merging multiple files at ouput stage
+
+#### `gulp-watch` is a file watcher that uses super-fast [`chokidar`] and emits vinyl objects.
+
+Example:
+```javascript
+var gulp = require('gulp'),
+    watch = require('gulp-watch');
+
+gulp.task('stream', function () {
+    // Endless stream mode
+    return watch('css/**/*.css', { ignoreInitial: false })
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('callback', function () {
+    // Callback mode, useful if any plugin in the pipeline depends on the `end`/`flush` event
+    return watch('css/**/*.css', function () {
+        gulp.src('css/**/*.css')
+            .pipe(gulp.dest('build'));
+    });
+});
+```
+
+#### `gulp-concat` for concatenating files
+
+### CSS files
+
+#### `gulp-nanocss` for nanofying CSS files
+
+#### `gulp-uncss` for removing unused CSS
+
+#### `gulp-csso` is a very cool CSS minificator
+
+### HTML files
+
+### `gulp-htmlmin` is a neat HTML minificator
+
+### Javascript
+
+#### `gulp-babel` for transpiling from next generation JS
+
+#### `gulp-uglify` for minifying JS files
+
+### Testing
+
+#### `gulp-mocha` is a thin wrapper around [`mocha`]
+
+[`gulp`]: http://gulpjs.com/
+[`mocha`]: https://mochajs.org/
+[`chokidar`]: https://github.com/paulmillr/chokidar

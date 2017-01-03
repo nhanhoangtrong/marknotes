@@ -7,6 +7,8 @@
 
 ## `gulpfile.js`
 
+This where we register all tasks could be executed and call `gulp <task_name>` to run a task. The `default` task could be run with `gulp` command.
+
 ### `gulp` tasks
 
 ```javascript
@@ -29,7 +31,7 @@ gulp.task('stylus', function() {
 ### Integrate `browser-sync` with `gulp`
 
 ```javascript
-var browserSync = require('browser-sync')
+var browserSync = require('browser-sync').create('name')
 
 // This task will notify browserSync to reload every time it run
 gulp.task('stylus', function() {
@@ -51,6 +53,38 @@ gulp.task('browserSync', function() {
     })
 })
 
-// This task will `watch` and reload after all change
-gulp.task('watch', [])
+// This task will `watch` and reload after any file is changed
+gulp.task('watch', ['tasks', 'to', 'run', 'parallel', 'before', 'watching'], function(done) {
+    gulp.watch('files/to/watch', ['tasks', 'when', 'files', 'change'])
+    gulp.watch('files/to/watch', browserSync.reload)
+})
+```
+
+### Run `Gulp` tasks asynchronously/synchronously
+
+For running taks asynchronously/synchronously, we could use two ways:
+
+#### Using `gulp.series` and `gulp.parallel` with `gulp@^4.0.0`
+
+```javascript
+let gulp = require('gulp')
+
+gulp.task('default', gulp.series('task1', 'task2', gulp.parallel('task3-1', 'task3-2'), function(done) {
+    done()
+}))
+```
+
+### Using `run-sequence` module
+
+First we have to install this module:
+
+`npm install --save-dev run-sequence`
+
+and then we can use this module in `gulpfile.js`
+
+```javascript
+let runSequence = require('run-sequence')
+gulp.task('default', function() {
+    runSequence('task1', 'task2', ['task3-1', 'task3-2'])
+})
 ```

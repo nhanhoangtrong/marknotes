@@ -2,7 +2,7 @@
 
 ![browser-sync logo](https://browsersync.io/img/icons/icons.svg)
 
->With each web page, device and browser, testing time grows exponentially. From live reloads to URL pushing, form replication to click mirroring, [`browser-sync`] cuts out repetitive manual tasks. It’s like an extra pair of hands. Customise an array of sync settings from the UI or command line to create a personalised test environment. Need more control? [`browser-sync`] is easily integrated with your web platform, build tools, and other Node.js projects.
+>With each web page, device and browser, testing time grows exponentially. From live reloads to URL pushing, form replication to click mirroring, [`browser-sync`] cuts out repetitive manual tasks. It’s like an extra pair of hands. Customizing an array of sync settings from the UI or command line to create a personalized test environment. Need more control? [`browser-sync`] is easily integrated with your web platform, build tools, and other Node.js projects.
 
 ## [`browser-sync`] command line
 
